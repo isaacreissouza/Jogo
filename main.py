@@ -17,6 +17,11 @@ class Game:
     # Desenha coisas na tela:
     def draw(self):
         self.screen.fill('red') # Pinta a tela de vermelho (mudar dps)
+    # Verifica interações do usuário:
+    def check_events(self):
+        for event in pg.event.get():
+            if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.type == pg.K_ESCAPE): # Permite fechar o jogo
+                pg.quit()
     # Loop que roda o jogo:
     def run(self):
         while True:
