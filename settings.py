@@ -1,8 +1,5 @@
+# Configurações do jogo:
 
-
-#configurações do jogo
-
- 
-RES = WIDTH, HEIGHT = 1360, 768 #altura e largura da tela
-FPS=60
+RES = WIDTH, HEIGHT = 1600, 900 # Altura e largura da tela
+FPS = 60 # Frames por segundo
 

@@ -1,14 +1,16 @@
 import pygame as pg
 from settings import *
+from map import *
 class Game:
     # Inicia o jogo e define parâmetros base (Resolução e FPS):
     def __init__(self):
         pg.init() # Começa a operação do jogo
         self.screen = pg.display.set_mode(RES) # Define uma variável pra tela
         self.clock = pg.time.Clock() # Define uma variável pro clock
+        self.new_game()
     # Cria novo jogo :
     def new_game(self):
-        pass # Depois adiciona coisas
+        self.map = Map(self) # Adiciona o mapa
     # Atualiza as informações da tela:
     def update(self):
         pg.display.flip()
@@ -17,6 +19,7 @@ class Game:
     # Função que desenha coisas na tela:
     def draw(self):
         self.screen.fill('red') # Pinta a tela de vermelho (mudar dps)
+        self.map.draw() # Desenha o mapa na tela
     # Função que verifica interações do usuário:
     def check_events(self):
         for event in pg.event.get():
