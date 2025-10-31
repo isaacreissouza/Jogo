@@ -49,21 +49,33 @@ class Player:
 
 
         #checagem da localização do jogador no mapa
-        
+    def check_wall_collision(self, x, y):
+        return (x,y) not in self.game.map.world_map
+    
+    #definição da colisão do jogador com as paredes
+    def check_wall_collision(self, dx, dy): #posição do jogador no x e y
+        if self.check_wall(int(self.x + dx), int(self.y)): #chega colisão no eixo x
+            self.x+= dx
+        if self.check_wall(int(self.x), int(self.y + dy)):#chega colisão no eixo y
+            self.y+= dy
+
     # Função que desenha o jogador no plano e que desenha sua direção de movimento com uma linha:
     def draw(self):
         pg.draw.line(self.game.screen, 'yellow', (self.x * 100, self.y * 100),
                      (self.x * 100 + WIDTH * cos(self.angle),
                       self.y * 100 + WIDTH * sin(self.angle)), 2)
         pg.draw.circle(self.game.screen, 'green', (self.x * 100, self.y * 100), 15)
+
     # Função que vai atualizar a posição do jogador a partir do movimento:
     def update(self):
         self.movement()
     # Função que retorna a posição em x e y:
     def pos(self):
+        #posição atual do jogador 
         return self.x, self.y
     # Função que retorna a posição em x e y no mapa:
     def map_pos(self):
+        #converte para inteiro
         return int(self.x), int(self.y)
     
 
