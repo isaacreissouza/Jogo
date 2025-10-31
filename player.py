@@ -31,6 +31,11 @@ class Player:
         if keys[pg.K_d]:
             dx += - speed_sin
             dy += speed_cos
+
+    #função para analisar a colisão com as paredes do jogo
+        self.check_wall_collision(dx, dy)
+
+
         # Aplica a variação e atualiza a posição:
         self.x += dx
         self.y += dy
@@ -40,6 +45,11 @@ class Player:
         if keys[pg.K_RIGHT]:
             self.angle += P_ROT_SPEED * self.game.delta_time
         self.angle %= tau
+
+
+
+        #checagem da localização do jogador no mapa
+        
     # Função que desenha o jogador no plano e que desenha sua direção de movimento com uma linha:
     def draw(self):
         pg.draw.line(self.game.screen, 'yellow', (self.x * 100, self.y * 100),
@@ -55,3 +65,6 @@ class Player:
     # Função que retorna a posição em x e y no mapa:
     def map_pos(self):
         return int(self.x), int(self.y)
+    
+
+     
