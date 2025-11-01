@@ -37,8 +37,8 @@ class Player:
 
 
         # Aplica a variação e atualiza a posição:
-        self.x += dx
-        self.y += dy
+        """self.x += dx
+        self.y += dy"""
         # Adiciona teclas pra ditar a variação do ângulo:
         if keys[pg.K_LEFT]:
             self.angle -= P_ROT_SPEED * self.game.delta_time
@@ -49,7 +49,7 @@ class Player:
 
 
         #checagem da localização do jogador no mapa
-    def check_wall_collision(self, x, y):
+    def check_wall(self, x, y):
         return (x,y) not in self.game.map.world_map
     
     #definição da colisão do jogador com as paredes

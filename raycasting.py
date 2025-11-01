@@ -10,8 +10,8 @@ class RayCasting:
 
 
     def ray_cast(self):
-        ox, oy= self.game.player.map_pos #pega a posição x e y do jogador
-        x_map, y_map= self.game.player.map_pos #mapeia essas posições onde o jogador se deslocar
+        ox, oy= self.game.player.pos() #pega a posição x e y do jogador
+        x_map, y_map= self.game.player.map_pos() #mapeia essas posições onde o jogador se deslocar
 
         ray_angle= self.game.player.angle - HALF_FOV + 0.0001 #angulo que o jogador se deslocar
         for ray in range(NUM_RAYS):#loop de rios na deslocação do jogador, no caso vamos necessitar do seno e cosseno
