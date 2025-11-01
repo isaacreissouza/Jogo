@@ -61,9 +61,11 @@ class Player:
 
     # Função que desenha o jogador no plano e que desenha sua direção de movimento com uma linha:
     def draw(self):
+        """
         pg.draw.line(self.game.screen, 'yellow', (self.x * 100, self.y * 100),
                      (self.x * 100 + WIDTH * cos(self.angle),
                       self.y * 100 + WIDTH * sin(self.angle)), 2)
+                      """
         pg.draw.circle(self.game.screen, 'green', (self.x * 100, self.y * 100), 15)
 
     # Função que vai atualizar a posição do jogador a partir do movimento:

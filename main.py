@@ -2,6 +2,7 @@ import pygame as pg
 from settings import *
 from map import *
 from player import *
+from raycasting import *
 class Game:
     # Inicia o jogo e define parâmetros base (Resolução e FPS):
     def __init__(self):
@@ -14,9 +15,12 @@ class Game:
     def new_game(self):
         self.map = Map(self) # Adiciona o mapa
         self.player = Player(self) # Adiciona o jogador
+        #classe de raycasting
+        self.raycasting= RayCasting(self)
     # Atualiza as informações da tela:
     def update(self):
         self.player.update() # Atualiza o jogador
+        self.raycasting.update() #atualiza o raycasting
         pg.display.flip()
         self. delta_time = self.clock.tick(FPS) # Torna a velocidade independente do FPS
         pg.display.set_caption(f'{self.clock.get_fps() :.1f}') # Mostra FPS na tela
