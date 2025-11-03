@@ -24,25 +24,19 @@ class Game:
         self.player.update() # Atualiza o jogador
         self.raycasting.update() #atualiza o raycasting
         pg.display.flip()
-        self. delta_time = self.clock.tick(FPS) # Torna a velocidade independente do FPS
+        self.delta_time = self.clock.tick(FPS) # Torna a velocidade independente do FPS
         pg.display.set_caption(f'{self.clock.get_fps() :.1f}') # Mostra FPS na tela
     # Função que desenha coisas na tela:
     def draw(self):
-        self.screen.fill('red') # Pinta a tela de vermelho (mudar dps)
-        self.map.draw() # Desenha o mapa na tela
-        self.player.draw() # Desenha o jogador na tela
+        self.screen.fill('black') # Pinta a tela de vermelho (mudar dps)
+        # self.map.draw() # Desenha o mapa na tela para debug
+        # self.player.draw() # Desenha o jogador na tela para debug
     # Função que verifica interações do usuário:
     def check_events(self):
         for event in pg.event.get():
-            """if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.type == pg.K_ESCAPE): # Permite fechar o jogo
-                pg.quit()"""
-            if event.type == pg.QUIT:# Permite fechar o jogo
+            if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.type == pg.K_ESCAPE): # Permite fechar o jogo
                 pg.quit()
                 sys.exit()
-
-            if event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
-                pg.quit()
-                sys.exit() #garantir que ESC fecha o jogo
     # Função com o loop que roda o jogo:
     def run(self):
         while True:

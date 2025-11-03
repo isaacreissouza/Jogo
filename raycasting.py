@@ -54,9 +54,17 @@ class RayCasting:
             else:
                 depth= depth_hor
 
-            # desenho para a indicação do jogador no mapa 
-            pg.draw.line(self.game.screen, 'yellow', (100 * ox, 100 * oy),
-                         (100 * (ox + depth * cos_a), 100 * (oy + depth * sin_a)), 2)
+            # Projeção em 3D:
+            proj_height = SCREEN_DIST / (depth + 0.0001)
+
+            # Remover efeito aquário:
+            depth *= math.cos(self.game.player.angle - ray_angle)
+        
+            # Desenhar paredes:
+            # Deixar fundo mais escuro de acordo com distância:
+            color = [255/(1 + depth ** 5 * 0.00002)] * 3
+            pg.draw.rect(self.game.screen, color,
+                         (ray * SCALE, HALF_HEIGHT - proj_height // 2, SCALE, proj_height))
 
             #proximo ângulo do raio
             ray_angle += DELTA_ANGLE
