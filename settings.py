@@ -22,3 +22,18 @@ MAX_DEPTH = 20 # distância máxima que o jogador pode enxergar
 
 SCREEN_DIST = HALF_WIDHT / math.tan(HALF_FOV) # Distância para a localização da tela
 SCALE = WIDTH // NUM_RAYS # Define uma escala para garantir melhor performance
+
+PLAYER_SIZE_SCALE = 60  # Escala do tamanho do jogador no mapa
+ 
+
+#Configurações do mouse
+MOUSE_SENSITIVITY = 0.0003 # Sensibilidade ao mexer no mouse
+MOUSE_MAX_REL = 40  # Máximo movimento relativo do mouse
+MOUSE_BOURDER_LEFT = 100  # Limite esquerdo para o mouse
+MOUSE_BOURDER_RIGHT = WIDTH - 100  # Limite direito para o mouse
+
+FLOOR_COLOR = (30, 30, 30)  
+
+#Tamanho da textura
+TEXTURE_SIZE = 256
+HALF_TEXTURE_SIZE = TEXTURE_SIZE // 2   #metade do tamanho da textura
