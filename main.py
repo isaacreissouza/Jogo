@@ -3,12 +3,14 @@ from settings import *
 from map import *
 from player import *
 from raycasting import *
+from object_render import *
 import sys
 
 class Game:
     # Inicia o jogo e define parâmetros base (Resolução e FPS):
     def __init__(self):
         pg.init() # Começa a operação do jogo
+        pg.mouse.set_visible(False) # Esconde o cursor do mouse
         self.screen = pg.display.set_mode(RES) # Define uma variável pra tela
         self.clock = pg.time.Clock() # Define uma variável pro clock
         self.delta_time = 1 # Define o tempo que passa entre frames 
@@ -17,6 +19,7 @@ class Game:
     def new_game(self):
         self.map = Map(self) # Adiciona o mapa
         self.player = Player(self) # Adiciona o jogador
+        self.object_renderer = ObjectRenderer(self) #classe de renderização de objetos
         #classe de raycasting
         self.raycasting= RayCasting(self)
     # Atualiza as informações da tela:
@@ -28,15 +31,20 @@ class Game:
         pg.display.set_caption(f'{self.clock.get_fps() :.1f}') # Mostra FPS na tela
     # Função que desenha coisas na tela:
     def draw(self):
-        self.screen.fill('black') # Pinta a tela de vermelho (mudar dps)
+        #self.screen.fill('black') # Pinta a tela de vermelho (mudar dps)
         # self.map.draw() # Desenha o mapa na tela para debug
         # self.player.draw() # Desenha o jogador na tela para debug
+        self.object_renderer.draw() # Desenha os objetos na tela
+        pg.display.flip()
+#TALVEZ EU TIRE ESSA LINHA DEPOIS
     # Função que verifica interações do usuário:
     def check_events(self):
         for event in pg.event.get():
-            if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.type == pg.K_ESCAPE): # Permite fechar o jogo
+            # fechar janela ou pressionar ESC
+            if event.type == pg.QUIT:
                 pg.quit()
                 sys.exit()
+           
     # Função com o loop que roda o jogo:
     def run(self):
         while True:

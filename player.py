@@ -40,10 +40,11 @@ class Player:
         """self.x += dx
         self.y += dy"""
         # Adiciona teclas pra ditar a variação do ângulo:
-        if keys[pg.K_LEFT]:
+        """if keys[pg.K_LEFT]:
             self.angle -= P_ROT_SPEED * self.game.delta_time
         if keys[pg.K_RIGHT]:
-            self.angle += P_ROT_SPEED * self.game.delta_time
+            self.angle += P_ROT_SPEED * self.game.delta_time"""
+        
         self.angle %= tau
 
 
@@ -54,23 +55,33 @@ class Player:
     
     #definição da colisão do jogador com as paredes
     def check_wall_collision(self, dx, dy): #posição do jogador no x e y
-        if self.check_wall(int(self.x + dx), int(self.y)): #chega colisão no eixo x
+        scale= PLAYER_SIZE_SCALE/self.game.delta_time
+        if self.check_wall(int(self.x + dx*scale), int(self.y)): #chega colisão no eixo x
             self.x+= dx
-        if self.check_wall(int(self.x), int(self.y + dy)):#chega colisão no eixo y
+        if self.check_wall(int(self.x), int(self.y + dy*scale)):#chega colisão no eixo y
             self.y+= dy
 
     # Função que desenha o jogador no plano e que desenha sua direção de movimento com uma linha:
     def draw(self):
-        """
+        
         pg.draw.line(self.game.screen, 'yellow', (self.x * 100, self.y * 100),
                      (self.x * 100 + WIDTH * cos(self.angle),
                       self.y * 100 + WIDTH * sin(self.angle)), 2)
-                      """
+                      
         pg.draw.circle(self.game.screen, 'green', (self.x * 100, self.y * 100), 15)
+
+    def mouse_control(self):#função de controle do mouse
+            mx, my = pg.mouse.get_pos()#pega a posição do mouse
+            if mx < MOUSE_BOURDER_LEFT or mx > MOUSE_BOURDER_RIGHT:
+                pg.mouse.set_pos([HALF_WIDHT, HALF_HEIGHT])
+            self.rel = pg.mouse.get_rel()[0]
+            self.rel = max(-MOUSE_MAX_REL, min(MOUSE_MAX_REL, self.rel))
+            self.angle += self.rel * MOUSE_SENSITIVITY * self.game.delta_time
 
     # Função que vai atualizar a posição do jogador a partir do movimento:
     def update(self):
         self.movement()
+        self.mouse_control()
     # Função que retorna a posição em x e y:
     def pos(self):
         #posição atual do jogador 
