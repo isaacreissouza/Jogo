@@ -5,6 +5,7 @@ from player import *
 from raycasting import *
 from object_render import *
 import sys
+from sprite_object import *
 
 class Game:
     # Inicia o jogo e define parâmetros base (Resolução e FPS):
@@ -22,10 +23,12 @@ class Game:
         self.object_renderer = ObjectRenderer(self) #classe de renderização de objetos
         #classe de raycasting
         self.raycasting= RayCasting(self)
+        self.static_sprite = SpriteObject(self)
     # Atualiza as informações da tela:
     def update(self):
         self.player.update() # Atualiza o jogador
         self.raycasting.update() #atualiza o raycasting
+        self.static_sprite.update()
         pg.display.flip()
         self.delta_time = self.clock.tick(FPS) # Torna a velocidade independente do FPS
         pg.display.set_caption(f'{self.clock.get_fps() :.1f}') # Mostra FPS na tela
