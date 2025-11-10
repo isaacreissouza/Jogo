@@ -6,7 +6,7 @@ class ObjectHandler:
         self.sprite_list = []
         self.static_sprite_path = 'sprites/sprites_rigid/'
         self.anim_sprite_path = 'sprites/sprites_animated/'
-
+        add_sprite = self.add_sprite
         # Mapa de sprites:
         add_sprite(SpriteObject(game))
         add_sprite(AnimatedSprite(game))
