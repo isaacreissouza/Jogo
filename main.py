@@ -7,6 +7,9 @@ from object_render import *
 import sys
 from sprite_object import *
 from object_handler import *
+from weapon import *
+from audio import Sound
+
 
 class Game:
     # Inicia o jogo e define parâmetros base (Resolução e FPS):
@@ -25,11 +28,18 @@ class Game:
         #classe de raycasting
         self.raycasting= RayCasting(self)
         self.object_handler = ObjectHandler(self)
+        #self.static_sprite=SpriteObject(self)
+        #self.animated_sprite=AnimatedSprite(self)
+        self.weapon = Weapon(self) # Adiciona a arma
+        self.sound = Sound(self) # Adiciona o som
     # Atualiza as informações da tela:
     def update(self):
         self.player.update() # Atualiza o jogador
         self.raycasting.update() #atualiza o raycasting
         self.object_handler.update()
+        #self.static_sprite.update()
+        #self.animated_sprite.update()
+        self.weapon.update() # Atualiza a arma
         pg.display.flip()
         self.delta_time = self.clock.tick(FPS) # Torna a velocidade independente do FPS
         pg.display.set_caption(f'{self.clock.get_fps() :.1f}') # Mostra FPS na tela
@@ -39,6 +49,7 @@ class Game:
         # self.map.draw() # Desenha o mapa na tela para debug
         # self.player.draw() # Desenha o jogador na tela para debug
         self.object_renderer.draw() # Desenha os objetos na tela
+        self.weapon.draw() # Desenha a arma na tela
         pg.display.flip()
 #TALVEZ EU TIRE ESSA LINHA DEPOIS
     # Função que verifica interações do usuário:
@@ -48,6 +59,9 @@ class Game:
             if event.type == pg.QUIT:
                 pg.quit()
                 sys.exit()
+
+            #tiro do jogador
+            self.player.single_fire_event(event)
            
     # Função com o loop que roda o jogo:
     def run(self):

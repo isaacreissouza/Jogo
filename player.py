@@ -8,6 +8,17 @@ class Player:
         self.game = game
         self.x, self.y = P_POS
         self.angle = P_ANGLE
+        
+        #se for True, significa que o jogador atirou
+        self.shot = False
+
+        #Clica no botão do mouse para atirar
+    def single_fire_event(self,event):
+        if event.type == pg.MOUSEBUTTONDOWN:
+            if event.button == 1 and not self.shot and not self.game.weapon.reloading:
+                self.game.sound.shotgun.play() #executa o som do tiro quando atira
+                self.shot = True
+                self.game.weapon.reloading = True
     # Função que vai definir o movimento do jogador a partir da velocidade e ângulo:
     def movement(self):
         sin_a = sin(self.angle)
