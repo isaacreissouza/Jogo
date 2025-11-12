@@ -56,6 +56,8 @@ class ObjectHandler:
         self.npc_positions = {npc.map_pos for npc in self.npc_list if npc.alive}
         [sprite.update() for sprite in self.sprite_list]
         [npc.update() for npc in self.npc_list]
+        self.check_win()
+
 
     def add_npc(self, npc):
         self.npc_list.append(npc)
