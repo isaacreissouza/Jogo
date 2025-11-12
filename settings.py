@@ -24,7 +24,7 @@ SCREEN_DIST = HALF_WIDHT / math.tan(HALF_FOV) # Distância para a localização 
 SCALE = WIDTH // NUM_RAYS # Define uma escala para garantir melhor performance
 
 PLAYER_SIZE_SCALE = 60  # Escala do tamanho do jogador no mapa
- 
+PLAYER_MAX_HEALTH = 100 # Vida do jogador
 
 #Configurações do mouse
 MOUSE_SENSITIVITY = 0.0003 # Sensibilidade ao mexer no mouse
