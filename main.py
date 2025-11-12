@@ -45,9 +45,9 @@ class Game:
         pg.display.set_caption(f'{self.clock.get_fps() :.1f}') # Mostra FPS na tela
     # Função que desenha coisas na tela:
     def draw(self):
-        #self.screen.fill('black') # Pinta a tela de vermelho (mudar dps)
-        # self.map.draw() # Desenha o mapa na tela para debug
-        # self.player.draw() # Desenha o jogador na tela para debug
+        #self.screen.fill('black') # Pinta a tela de vermelho (mudar dps) pra debug
+        #self.map.draw() # Desenha o mapa na tela para debug
+        #self.player.draw() # Desenha o jogador na tela para debug
         self.object_renderer.draw() # Desenha os objetos na tela
         self.weapon.draw() # Desenha a arma na tela
         pg.display.flip()
