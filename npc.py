@@ -1,5 +1,5 @@
 from sprite_object import *
-from random import randint, random, choice
+from random import randint, random
 
 class NPC(AnimatedSprite):
     def __init__(self, game, path='sprites/npc/soldier/0.png', pos=(10.5, 5.5), scale=0.6, shift=0.38, animation_time=180):
@@ -41,7 +41,7 @@ class NPC(AnimatedSprite):
 
 
     def movement(self):
-        next_pos = self.game.pathfinding.get_path(self.map_pos, self.game.player.map_pos)
+        next_pos = self.game.pathfinding.get_path(self.map_pos, self.game.player.map_pos())
         next_x, next_y = next_pos
         if next_pos not in self.game.object_handler.npc_positions:
             angle = math.atan2(next_y + 0.5 - self.y, next_x + 0.5 - self.x)
@@ -52,7 +52,8 @@ class NPC(AnimatedSprite):
     def attack(self):
         if self.animation_trigger:
             self.game.sound.npc_shot.play()
-
+            if random() < self.accuracy:
+                self.game.player.get_damage(self.attack_damage)
     def animate_death(self):
         if not self.alive:
             if self.game.global_trigger and self.frame_counter < len(self.death_images) - 1:
@@ -100,6 +101,7 @@ class NPC(AnimatedSprite):
         else:
             self.animate_death()
 
+    @property # Transforma map_pos em atributo, então não precisa ficar colocando parênteses toda hora
     def map_pos(self):
         return int(self.x), int(self.y)
     
