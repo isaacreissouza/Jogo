@@ -19,6 +19,9 @@ class Game:
         self.screen = pg.display.set_mode(RES) # Define uma variável pra tela
         self.clock = pg.time.Clock() # Define uma variável pro clock
         self.delta_time = 1 # Define o tempo que passa entre frames 
+        self.global_trigger = False
+        self.global_event = pg.USEREVENT + 0
+        pg.time.set_timer(self.global_event, 40)
         self.new_game()
     # Cria novo jogo:
     def new_game(self):
@@ -54,12 +57,14 @@ class Game:
 #TALVEZ EU TIRE ESSA LINHA DEPOIS
     # Função que verifica interações do usuário:
     def check_events(self):
+        self.global_trigger = False
         for event in pg.event.get():
             # fechar janela ou pressionar ESC
             if event.type == pg.QUIT:
                 pg.quit()
                 sys.exit()
-
+            elif event.type == self.global_event:
+                self.global_trigger = True
             #tiro do jogador
             self.player.single_fire_event(event)
            
