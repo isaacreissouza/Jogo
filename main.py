@@ -9,7 +9,7 @@ from sprite_object import *
 from object_handler import *
 from weapon import *
 from audio import Sound
-
+from pathfinding import *
 
 class Game:
     # Inicia o jogo e define parâmetros base (Resolução e FPS):
@@ -35,6 +35,7 @@ class Game:
         #self.animated_sprite=AnimatedSprite(self)
         self.weapon = Weapon(self) # Adiciona a arma
         self.sound = Sound(self) # Adiciona o som
+        self.pathfinding = PathFinding(self)
     # Atualiza as informações da tela:
     def update(self):
         self.player.update() # Atualiza o jogador
