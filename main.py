@@ -36,6 +36,7 @@ class Game:
         self.weapon = Weapon(self) # Adiciona a arma
         self.sound = Sound(self) # Adiciona o som
         self.pathfinding = PathFinding(self)
+        pg.mixer.music.play(-1)
     # Atualiza as informações da tela:
     def update(self):
         self.player.update() # Atualiza o jogador
