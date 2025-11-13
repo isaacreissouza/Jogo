@@ -1,8 +1,8 @@
 from sprite_object import *
 from npc import *
 
-class ObjectHandler:
-    def __init__(self, game):
+class ObjectHandler: # classe que gerencia todos os objetos e NPCs no jogo
+    def __init__(self, game): # construtor da classe
         self.game = game
         self.sprite_list = []
         self.npc_list = []
@@ -37,30 +37,30 @@ class ObjectHandler:
         add_npc(CacoDemonNPC(game, pos=(5.5, 16.5)))
         add_npc(CyberDemonNPC(game, pos=(14.5, 25.5)))
 
-    def spawn_npc(self):
-        for i in range(self.enemies):
+    def spawn_npc(self): # Função para spawnar NPCs aleatoriamente no mapa
+        for i in range(self.enemies):# número de inimigos a serem spawnados
                 npc = choices(self.npc_types, self.weights)[0]
                 pos = x, y = randrange(self.game.map.cols), randrange(self.game.map.rows)
-                while (pos in self.game.map.world_map) or (pos in self.restricted_area):
+                while (pos in self.game.map.world_map) or (pos in self.restricted_area): # verifica se a posição não é uma parede ou área restrita
                     pos = x, y = randrange(self.game.map.cols), randrange(self.game.map.rows)
-                self.add_npc(npc(self.game, pos=(x + 0.5, y + 0.5)))
+                self.add_npc(npc(self.game, pos=(x + 0.5, y + 0.5)))# adiciona o NPC na posição gerada
 
-    def check_win(self):
-        if not len(self.npc_positions):
-            self.game.object_renderer.win()
+    def check_win(self): #verifica se todos os NPCs foram eliminados
+        if not len(self.npc_positions): #se não houver mais NPCs vivos
+            self.game.object_renderer.win() #chama a função de vitória do renderizador
             pg.display.flip()
             pg.time.delay(1500)
             self.game.new_game()
 
-    def update(self):
-        self.npc_positions = {npc.map_pos for npc in self.npc_list if npc.alive}
-        [sprite.update() for sprite in self.sprite_list]
-        [npc.update() for npc in self.npc_list]
-        self.check_win()
+    def update(self): #atualiza os objetos e NPCs no jogo
+        self.npc_positions = {npc.map_pos for npc in self.npc_list if npc.alive}# cria um conjunto com as posições dos NPCs vivos
+        [sprite.update() for sprite in self.sprite_list]# atualiza todas as sprites estáticas e animadas
+        [npc.update() for npc in self.npc_list]# atualiza todos os NPCs
+        self.check_win()# verifica se o jogador venceu o jogo
 
 
-    def add_npc(self, npc):
-        self.npc_list.append(npc)
+    def add_npc(self, npc): #adiciona um NPC à lista de NPCs
+        self.npc_list.append(npc)# adiciona o NPC à lista de NPCs
 
-    def add_sprite(self, sprite):
+    def add_sprite(self, sprite):# adiciona uma sprite à lista de sprites
         self.sprite_list.append(sprite)

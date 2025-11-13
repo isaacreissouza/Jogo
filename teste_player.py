@@ -1,4 +1,5 @@
 # teste_player.py
+#Apenas para testar se a função single_fire_event foi adicionada corretamente na classe Player
 import player
 import inspect
 

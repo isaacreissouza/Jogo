@@ -1,4 +1,5 @@
 # teste_audio.py
+#Apenas para testar se a classe Sound foi adicionada corretamente no módulo audio
 import audio
 import inspect
 print("audio.__file__:", getattr(audio, '__file__', 'NÃO ENCONTRADO'))
