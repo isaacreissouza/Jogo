@@ -3,7 +3,7 @@ import math
 from settings import *
 
 
-#mapeando a percepção do jogador no mapa
+# Classe que mapea a percepção do jogador no mapa:
 class RayCasting:
     def __init__(self, game):
         self.game = game

@@ -19,56 +19,49 @@ class Game:
         self.screen = pg.display.set_mode(RES) # Define uma variável pra tela
         self.clock = pg.time.Clock() # Define uma variável pro clock
         self.delta_time = 1 # Define o tempo que passa entre frames 
-        self.global_trigger = False
-        self.global_event = pg.USEREVENT + 0
-        pg.time.set_timer(self.global_event, 40)
+        self.global_trigger = False # Variável usada na padronização de funções de eventos e animações
+        self.global_event = pg.USEREVENT + 0 # Variável usada na padronização de funções de eventos e animações
+        pg.time.set_timer(self.global_event, 40) # Adiciona um timer padronizado pra animação
         self.new_game()
+
     # Cria novo jogo:
     def new_game(self):
         self.map = Map(self) # Adiciona o mapa
         self.player = Player(self) # Adiciona o jogador
-        self.object_renderer = ObjectRenderer(self) #classe de renderização de objetos
-        #classe de raycasting
-        self.raycasting= RayCasting(self)
-        self.object_handler = ObjectHandler(self)
-        #self.static_sprite=SpriteObject(self)
-        #self.animated_sprite=AnimatedSprite(self)
+        self.object_renderer = ObjectRenderer(self) # Classe de renderização de objetos
+        self.raycasting= RayCasting(self) # Classe de raycasting
+        self.object_handler = ObjectHandler(self) # Classe que adiciona sprites e npcs
         self.weapon = Weapon(self) # Adiciona a arma
         self.sound = Sound(self) # Adiciona o som
-        self.pathfinding = PathFinding(self)
-        pg.mixer.music.play(-1)
+        self.pathfinding = PathFinding(self) # Adiciona pathfinding
+        pg.mixer.music.play(-1) # Toca a música
+
     # Atualiza as informações da tela:
     def update(self):
         self.player.update() # Atualiza o jogador
-        self.raycasting.update() #atualiza o raycasting
-        self.object_handler.update()
-        #self.static_sprite.update()
-        #self.animated_sprite.update()
+        self.raycasting.update() # Atualiza o raycasting
+        self.object_handler.update() # Atualiza os sprites e texturas
         self.weapon.update() # Atualiza a arma
-        pg.display.flip()
+        pg.display.flip() # Atualiza a tela toda
         self.delta_time = self.clock.tick(FPS) # Torna a velocidade independente do FPS
         pg.display.set_caption(f'{self.clock.get_fps() :.1f}') # Mostra FPS na tela
+
     # Função que desenha coisas na tela:
     def draw(self):
-        #self.screen.fill('black') # Pinta a tela de vermelho (mudar dps) pra debug
-        #self.map.draw() # Desenha o mapa na tela para debug
-        #self.player.draw() # Desenha o jogador na tela para debug
         self.object_renderer.draw() # Desenha os objetos na tela
         self.weapon.draw() # Desenha a arma na tela
         pg.display.flip()
-#TALVEZ EU TIRE ESSA LINHA DEPOIS
+        
     # Função que verifica interações do usuário:
     def check_events(self):
         self.global_trigger = False
         for event in pg.event.get():
-            # fechar janela ou pressionar ESC
-            if event.type == pg.QUIT:
+            if event.type == pg.QUIT: # Permite fechar o jogo
                 pg.quit()
                 sys.exit()
-            elif event.type == self.global_event:
+            elif event.type == self.global_event: # Marca a ocorrência de eventos
                 self.global_trigger = True
-            #tiro do jogador
-            self.player.single_fire_event(event)
+            self.player.single_fire_event(event) # Tiro do jogador
            
     # Função com o loop que roda o jogo:
     def run(self):
